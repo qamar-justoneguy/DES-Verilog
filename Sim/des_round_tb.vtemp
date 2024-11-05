@@ -1,0 +1,24 @@
+`timescale 1ns / 1ps
+
+module des_round_tb;
+
+reg [0:63] DIN;
+reg [0:47] key;
+wire [0:63] DOUT;
+wire [0:31] L;
+wire [0:31] R;
+wire [0:31] Fout;
+wire [0:63] i_perm;
+
+des_round dr1 (.DIN(DIN), .key(key), .DOUT(DOUT));
+
+initial begin
+#10
+DIN = 64'h5a78e3944a1210f6;
+key = 48'h06eda4acf5b5;
+#10 $display("DIN = %h", DIN);
+    $display("key = %h", key);
+    $display("DOUT = %h", DOUT);
+end
+
+endmodule

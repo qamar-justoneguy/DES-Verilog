@@ -1,0 +1,20 @@
+`timescale 1ns / 1ps
+
+module des_function_tb;
+
+reg [0:31] DIN;
+reg [0:47] key;
+wire [0:31] DOUT;
+
+des_function df1 (.DIN(DIN), .key(key), .DOUT(DOUT));
+
+initial begin
+#10
+DIN = 64'h4a1210f6;
+key = 48'h06eda4acf5b5;
+#10 $display("DIN = %h", DIN);
+    $display("key = %h", key);
+    $display("DOUT = %h", DOUT);
+end
+
+endmodule

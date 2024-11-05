@@ -1,0 +1,20 @@
+`timescale 1ns/1ps
+
+module round_key_gen_tb;
+
+reg [0:55] round_key_reg = 56'h0f00cebcfc33e8;
+wire [0:55] next_key;
+wire [0:47] round_key;
+
+round_key_gen rkg1 (.DIN(round_key_reg), .shift(1'b0), .next_key(next_key), .round_key(round_key));
+
+initial
+begin
+    #10
+    $display("round_key = %h", round_key);
+
+    #200
+    $finish;
+end
+
+endmodule

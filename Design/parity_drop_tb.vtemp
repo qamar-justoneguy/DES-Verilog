@@ -1,0 +1,31 @@
+`timescale 1ns / 1ps
+
+module parity_drop_tb;
+
+reg [0:63] key;
+reg clock;
+
+wire [0:55] pd_key;
+
+initial
+begin
+    clock = 1'b0;
+    key = 64'haabb09182736ccdd;
+
+    #100
+    $finish;
+end
+
+parity_drop pd1 (.DIN(key), .DOUT(pd_key));
+
+always
+    #5 clock = ~clock; // Clock with a period of 10 ns.
+
+always @(posedge clock)
+begin
+    $display("Clock = %h", clock); 
+    $display("key = %h", key); 
+    $display("pd_key = %h\ns", pd_key); 
+end
+
+endmodule

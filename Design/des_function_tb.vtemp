@@ -1,0 +1,22 @@
+`timescale 1ns / 1ps
+
+module des_function_tb;
+
+reg [0:31] R0;
+reg [0:31] L0;
+reg [0:47] key;
+wire [0:31] DOUT;
+
+des_function df1 (.DIN(R0), .key(key), .DOUT(DOUT));
+
+initial begin
+#10
+L0 = 32'h5a78e394;
+R0 = 32'h4a1210f6;
+key = 48'h06eda4acf5b5;
+#10 $display("L2 = %h  R2 = %h", L0, R0);
+    $display("key = %h", key);
+    $display("L3 = %h  R3  = %h", R0, DOUT ^ L0);
+end
+
+endmodule
